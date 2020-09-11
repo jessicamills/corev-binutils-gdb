@@ -2288,11 +2288,12 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 		  s = expr_end;
 		  if (imm_expr->X_op != O_constant || imm_expr->X_add_number < 0 
 			|| imm_expr->X_add_number > 1)
-		    as_fatal (_("internal error: loop number must be 0 or 1 not %d"),
+		    as_fatal (_("internal error: loop number must be 0 or 1 not %ld"),
 			imm_expr->X_add_number);
 		  INSERT_OPERAND (LN, *ip, imm_expr->X_add_number);
 		  continue;
 		}
+	      /* Fall through */
 	    case 's':		/* Source register.  */
 	    case 't':		/* Target register.  */
 	    case 'r':		/* rs3.  */
@@ -2381,20 +2382,19 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 	    case 'b':		   
 	      if (args[1] == '1')
 		{
-		  char *saved_s=s;
 		  ++args;
  		  my_getExpression (imm_expr, s);
 		  s = expr_end;
 		  if (imm_expr->X_op == O_constant)
 		    {
 		      if (imm_expr->X_add_number < 0 || ((imm_expr->X_add_number>>1) > 0x0FFF))
-		      	as_fatal (_("internal error: %d constant out of range for "
+		      	as_fatal (_("internal error: %ld constant out of range for "
 				    "cv.starti/cv.endi/cv.setup, range:[0, %d]"),
 				  imm_expr->X_add_number, 0xFFE);
 		      if ((imm_expr->X_add_number % 2) == 1)
 		    	{
 			  as_warn (_("constant for cv.starti/cv.endi/cv.setup "
-				     "must be even: %d truncated to %d"),
+				     "must be even: %ld truncated to %ld"),
 			  	   imm_expr->X_add_number, imm_expr->X_add_number-1);
 			  imm_expr->X_add_number--;
 			}
@@ -2404,18 +2404,17 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 		}
 	      else if (args[1] == '2')
 		{
-		  char *saved_s=s;
 		  ++args;
 		  my_getExpression (imm_expr, s);
 		  s = expr_end;
 		  if (imm_expr->X_op == O_constant)
 		    {
 		      if (imm_expr->X_add_number < 0 || ((imm_expr->X_add_number>>1) > 31))
-		        as_fatal (_("internal error: %d constant out of range for cv.setupi, range:[0, %d]"),
+		        as_fatal (_("internal error: %ld constant out of range for cv.setupi, range:[0, %d]"),
 				imm_expr->X_add_number, 0x1E);
 		      if ((imm_expr->X_add_number % 2) == 1)
 			{
-			  as_warn (_("constant for cv.setupi must be even: %d truncated to %d"),
+			  as_warn (_("constant for cv.setupi must be even: %ld truncated to %ld"),
 			  	imm_expr->X_add_number, imm_expr->X_add_number-1);
 			  imm_expr->X_add_number--;
 			}
@@ -2444,14 +2443,13 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 	      if (args[1] == 'i')
 		{
 		  /* immediate loop count, we don't want to use BFD_RELOC_RISCV_LO12_I to avoid colliding with relaxation */
-		  char *saved_s=s;
 		  ++args;
 		  my_getExpression (imm_expr, s);
 		  check_absolute_expr (ip, imm_expr, FALSE);
 		  s = expr_end;
 		  if (imm_expr->X_op != O_constant || imm_expr->X_add_number >= (int) RISCV_IMM_REACH ||
 		      imm_expr->X_add_number < 0)
-			  as_fatal (_("internal error: %d constant out of range for cv.counti/cv.setupi, range:[0, %d]"),
+			  as_fatal (_("internal error: %ld constant out of range for cv.counti/cv.setupi, range:[0, %d]"),
 				    imm_expr->X_add_number, ((int) RISCV_IMM_REACH) -1);
 		  INSERT_OPERAND (IMM12, *ip, imm_expr->X_add_number);
 		  continue;
