@@ -3136,8 +3136,8 @@ md_apply_fix (fixS *fixP, valueT *valP, segT seg ATTRIBUTE_UNUSED)
 	     error in case not resolvable */
 	  howto = bfd_reloc_type_lookup (stdoutput, fixP->fx_r_type);
 	  bfd_vma target = S_GET_VALUE (fixP->fx_addsy) + *valP;
-	  bfd_vma delta = (target - md_pcrel_from (fixP)) >> howto->rightshift;
-	  r = bfd_check_overflow (howto->complain_on_overflow, 12, 0, 32, delta);
+	  bfd_vma delta = (target - md_pcrel_from (fixP));
+	  r = bfd_check_overflow (howto->complain_on_overflow, 12, 1, 32, delta);
 	  if (r == bfd_reloc_overflow)
 	    as_fatal (_("BFD_RELOC_RISCV_CVPCREL_UI12 Overflow: Disp=%d"),
 		      (int) delta);
@@ -3155,8 +3155,8 @@ md_apply_fix (fixS *fixP, valueT *valP, segT seg ATTRIBUTE_UNUSED)
 	  error in case not resolvable */
 	  howto = bfd_reloc_type_lookup (stdoutput, fixP->fx_r_type);
 	  bfd_vma target = S_GET_VALUE (fixP->fx_addsy) + *valP;
-	  bfd_vma delta = (target - md_pcrel_from (fixP)) >> howto->rightshift;
-	  r = bfd_check_overflow (howto->complain_on_overflow, 5, 0, 32, delta);
+	  bfd_vma delta = (target - md_pcrel_from (fixP));
+	  r = bfd_check_overflow (howto->complain_on_overflow, 5, 1, 32, delta);
 	  if (r == bfd_reloc_overflow)
 	    as_fatal (_("BFD_RELOC_RISCV_CVPCREL_URS1 Overflow: Disp=%d"),
 		      (int) delta);
