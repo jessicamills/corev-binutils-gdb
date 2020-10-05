@@ -962,7 +962,7 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
       case 'd':
 	if (*p == 'i')
 	  {
-	    used_bits |= (0xf00 |(ENCODE_I1TYPE_LN(-1U))); /* Bits 11:08 preset to 0 */
+	    used_bits |= ENCODE_I1TYPE_LN(-1U); /* Bits 11:08 preset to 0 */
 	    ++p;
 	    break;
 	  }
