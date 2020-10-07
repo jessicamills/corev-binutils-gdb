@@ -3,10 +3,6 @@
 	* config/tc-riscv.c: Fixed issue arising from incorrect CORE-V
 	hardware loop masks.
 
-2020-10-05  Mary Bennett <mary.bennett@embecosm.com>
-
-	* config/tc-riscv.c: Tidied up CORE-V specific relocations.
-
 2020-09-10  Pietra Ferreira  <pietra.ferreira@embecosm.com>
 
 	* config/tc-riscv.c: Added CORE-V harware loop support.
