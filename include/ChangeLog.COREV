@@ -1,3 +1,7 @@
+2020-10-08  Mary Bennett  <mary.bennett@embecosm.com>
+
+	* opcode/riscv.h: Added support for corevhwlp.
+
 2020-10-05  Jessica Mills <jessica.mills@embecosm.com>
 
 	* opcode/riscv-opc.h: Fixed incorrect masks for CORE-V hardware loop
