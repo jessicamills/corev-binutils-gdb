@@ -243,7 +243,7 @@ riscv_multi_subset_supports (enum riscv_insn_class insn_class)
     case INSN_CLASS_Q: return riscv_subset_supports ("q");
 
     case INSN_CLASS_COREV_HWLP: 
-      return riscv_subset_supports ("xcorevhwlp") && riscv_subset_supports ("xcorev");
+      return riscv_subset_supports ("xcorevhwlp") || riscv_subset_supports ("xcorev");
 
     default:
       as_fatal ("Unreachable");
