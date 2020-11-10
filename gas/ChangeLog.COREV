@@ -1,13 +1,10 @@
-2020-10-21  Jessica Mills <jessica.mills@embecosm.com>
-	
+2020-10-21  Jessica Mills  <jessica.mills@embecosm.com>
+
 	* config/tc-riscv.c: Added CORE-V multiply accumulate support.
 
 2020-10-08  Mary Bennett  <mary.bennett@embecosm.com>
 
 	* config/tc-riscv.c: Added support for corevhwlp.
-
-2020-10-05  Jessica Mills <jessica.mills@embecosm.com>
-
 	* config/tc-riscv.c: Fixed issue arising from incorrect CORE-V
 	hardware loop masks.
 

@@ -2453,15 +2453,15 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 		    }
 		  else *imm_reloc = BFD_RELOC_RISCV_CVPCREL_URS1;
 		}
-	      else if (args[1]=='3') 
+	      else if (args[1]=='3')
 		{
 		  my_getExpression (imm_expr, s);
-		  check_absolute_expr (ip, imm_expr, FALSE); 
+		  check_absolute_expr (ip, imm_expr, FALSE);
 		  s = expr_end;
 		  if (imm_expr->X_add_number<0 || imm_expr->X_add_number>31) break;
 		  ip->insn_opcode |= ENCODE_I3TYPE_UIMM (imm_expr->X_add_number);
 		  ++args;
-		} 
+		}
 	      else
 		{
 		  my_getExpression (imm_expr, s);

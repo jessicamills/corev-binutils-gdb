@@ -62,8 +62,11 @@
 	* gas/riscv/cv-mac-mulun.s: Likewise.
 	* gas/riscv/cv-mac-mulurn.d: Likewise.
 	* gas/riscv/cv-mac-mulurn.s: Likewise.
-	* gas/riscv/cv-march-rv32i-xcorev.s: Added mac instructions.
-	* gas/riscv/cv-march-rv32i-xcorev.d: Likewise.
+	* gas/riscv/cv-mac-march-rv32i-xcorev.s: Likewise.
+	* gas/riscv/cv-mac-march-rv32i-xcorev.d: Likewise.
+	* gas/riscv/cv-hwloop-march-rv32i-xcorev.s: Renamed to seperate from
+	mac.
+	* gas/riscv/cv-hwloop-march-rv32i-xcorev.d: Likewise.
 
 2020-10-30  Mary Bennett  <mary.bennett@embecosm.com>
 
