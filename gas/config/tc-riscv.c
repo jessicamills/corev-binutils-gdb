@@ -1004,6 +1004,11 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
 	    used_bits |= ENCODE_CV_MAC_UIMM5(-1U);
 	    ++p; break;
 	  }
+	else if (*p == '3')
+	  {
+	    used_bits |= ENCODE_CV_MAC_UIMM5(-1U);
+	    ++p; break;
+	  }
 	break;
       case '1': break;
       case 'F': /* funct */
