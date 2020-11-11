@@ -1,4 +1,4 @@
-2020-10-21  Jessica Mills <jessica.mills@embecosm.com>
+2020-11-11  Jessica Mills <jessica.mills@embecosm.com>
 
 	* opcode/riscv-opc.h: Added CORE-V multiply accumulate support.
 	* opcode/riscv.h: Added CORE-V multiply accumulate support.
