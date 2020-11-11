@@ -1001,7 +1001,7 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
 	  }
 	else if (*p == '3')
 	  {
-	    used_bits |= ENCODE_I3TYPE_UIMM(-1U);
+	    used_bits |= ENCODE_CV_MAC_UIMM5(-1U);
 	    ++p; break;
 	  }
 	break;
@@ -2459,7 +2459,7 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 		  check_absolute_expr (ip, imm_expr, FALSE);
 		  s = expr_end;
 		  if (imm_expr->X_add_number<0 || imm_expr->X_add_number>31) break;
-		  ip->insn_opcode |= ENCODE_I3TYPE_UIMM (imm_expr->X_add_number);
+		  ip->insn_opcode |= ENCODE_CV_MAC_UIMM5 (imm_expr->X_add_number);
 		  ++args;
 		}
 	      else
