@@ -1,4 +1,4 @@
-2020-11-09  Jessica Mills  <jessica.mills@embecosm.com>
+2020-11-11  Jessica Mills  <jessica.mills@embecosm.com>
 
 	* gas/riscv/cv-mac-01.d: Added new test.
 	* gas/riscv/cv-mac-01.l: Likewise.
