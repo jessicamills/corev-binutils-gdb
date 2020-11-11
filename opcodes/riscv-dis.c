@@ -288,7 +288,7 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	    }
 	  else if (d[1]=='3')
 	    {
-	      print (info->stream, "%d", ((int) EXTRACT_I3TYPE_UIMM (l))&0x1F); ++d;
+	      print (info->stream, "%d", ((int) EXTRACT_CV_MAC_UIMM5 (l))&0x1F); ++d;
 	      break;
 	    }
 	/* Fall through.  */
