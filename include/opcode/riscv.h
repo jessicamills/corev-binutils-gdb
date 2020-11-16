@@ -347,7 +347,8 @@ enum riscv_insn_class
    INSN_CLASS_F_AND_C,
    INSN_CLASS_Q,
    INSN_CLASS_COREV_HWLP,
-   INSN_CLASS_COREV_MAC
+   INSN_CLASS_COREV_MAC,
+   INSN_CLASS_COREV_ALU
   };
 
 /* This structure holds information for a particular instruction.  */
