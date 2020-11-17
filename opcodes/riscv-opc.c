@@ -842,6 +842,7 @@ const struct riscv_opcode riscv_opcodes[] =
 {"cv.clipur", 0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CLIPUR, MASK_SLET,   match_opcode,   0},
 {"cv.addn",   0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_ADDN,   MASK_ADDN,   match_opcode,   0},
 {"cv.addun",  0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_ADDUN,  MASK_ADDN,   match_opcode,   0},
+{"cv.addunr", 0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_ADDUNR, MASK_SLET,   match_opcode,   0},
 {"cv.addrn",  0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_ADDRN,  MASK_ADDN,   match_opcode,   0},
 {"cv.addurn", 0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_ADDURN, MASK_ADDN,   match_opcode,   0},
 {"cv.addnr",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_ADDNR,  MASK_SLET,   match_opcode,   0},
