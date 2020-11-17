@@ -1,4 +1,4 @@
-#as: -march=rv32i_xcorevmac
+#as: -march=rv32i_xcorevalu
 #objdump: -d
 
 .*:[ 	]+file format .*
