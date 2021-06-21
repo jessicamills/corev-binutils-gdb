@@ -4,6 +4,13 @@
    Contributed by Andrew Waterman (andrew@sifive.com).
    Based on MIPS target.
 
+   Modified for CORE-V by:
+   Mary Bennett (mary.bennett@embecosm.com)
+   Pietra Ferreira (pietra.ferreira@embecosm.com)
+   Jessica Mills (jessica.mills@embecosm.com)
+
+   Some of these changes are (C) Open Hardware Group, pending FSF assignment.
+
    This file is part of GAS.
 
    GAS is free software; you can redistribute it and/or modify
@@ -342,6 +349,15 @@ riscv_multi_subset_supports (enum riscv_insn_class insn_class)
 
     case INSN_CLASS_ZBC:
       return riscv_subset_supports ("zbc");
+
+    case INSN_CLASS_COREV_HWLP:
+      return riscv_subset_supports ("xcorevhwlp") || riscv_subset_supports ("xcorev");
+
+    case INSN_CLASS_COREV_MAC:
+      return riscv_subset_supports ("xcorevmac") || riscv_subset_supports ("xcorev");
+
+    case INSN_CLASS_COREV_ALU:
+      return riscv_subset_supports ("xcorevalu") || riscv_subset_supports ("xcorev");
 
     default:
       as_fatal ("internal: unreachable");
@@ -1086,9 +1102,38 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
       case '>': USE_BITS (OP_MASK_SHAMT, OP_SH_SHAMT); break;
       case 'A': break; /* Macro operand, must be symbol.  */
       case 'B': break; /* Macro operand, must be symbol or constant.  */
+      case 'b': /* CORE-V Specific.  */
+	if (*p == '1')
+	  {
+	    used_bits |= ENCODE_ITYPE_IMM(-1U);
+	    ++p; break;
+	  }
+	else if (*p == '2')
+	  {
+	    used_bits |= ENCODE_CV_HWLP_UIMM5(-1U);
+	    ++p; break;
+	  }
+	else if (*p == '3')
+	  {
+	    used_bits |= ENCODE_CV_MAC_UIMM5(-1U);
+	    ++p; break;
+	  }
+	else if (*p == 'i')
+	  {
+	    used_bits |= ENCODE_CV_ALU_UIMM5(-1U);
+	    ++p; break;
+	  }
+	break;
       case 'I': break; /* Macro operand, must be constant.  */
       case 'D': /* RD, floating point.  */
-      case 'd': USE_BITS (OP_MASK_RD, OP_SH_RD); break;
+      case 'd': 
+	if (*p == 'i')
+ 	  {
+	    used_bits |= ENCODE_CV_HWLP_LN(-1U);
+	    ++p;
+	    break;
+	  }
+	USE_BITS (OP_MASK_RD, OP_SH_RD); break;
       case 'Z': /* RS1, CSR number.  */
       case 'S': /* RS1, floating point.  */
       case 's': USE_BITS (OP_MASK_RS1, OP_SH_RS1); break;
@@ -1104,7 +1149,7 @@ validate_riscv_insn (const struct riscv_opcode *opc, int length)
       case 'P': USE_BITS (OP_MASK_PRED, OP_SH_PRED); break;
       case 'Q': USE_BITS (OP_MASK_SUCC, OP_SH_SUCC); break;
       case 'o': /* ITYPE immediate, load displacement.  */
-      case 'j': used_bits |= ENCODE_ITYPE_IMM (-1U); break;
+      case 'j': used_bits |= ENCODE_ITYPE_IMM (-1U); if (*p == 'i') ++p; break;
       case 'a': used_bits |= ENCODE_JTYPE_IMM (-1U); break;
       case 'p': used_bits |= ENCODE_BTYPE_IMM (-1U); break;
       case 'q': used_bits |= ENCODE_STYPE_IMM (-1U); break;
@@ -2444,6 +2489,19 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 	      break;
 
 	    case 'd': /* Destination register.  */
+	      if (args[1] == 'i')
+		{
+		  ++args;
+		  my_getExpression (imm_expr, s);
+		  s = expr_end;
+		  if (imm_expr->X_op != O_constant ||
+		      imm_expr->X_add_number < 0 || imm_expr->X_add_number > 1)
+		    as_bad (_("%s loop number must be 0 or 1"),
+			    ip->insn_mo->name);
+		  INSERT_OPERAND (LN, *ip, imm_expr->X_add_number);
+		  continue;
+		}
+	      /* Fall through */
 	    case 's': /* Source register.  */
 	    case 't': /* Target register.  */
 	    case 'r': /* RS3 */
@@ -2524,7 +2582,93 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 	      *imm_reloc = BFD_RELOC_32;
 	      s = expr_end;
 	      continue;
-
+	      /* CORE-V Specific.
+		 b1: pc rel 12 bits offset for cv.starti and cv.endi
+		     sign-extended immediate as pc rel displacement for hwloop
+		 b2: pc rel 5 bits unsigned offset for cv.setupi
+		 b3: 5 bits usigned offset for MAC
+		 bi: 5 bits unsigned offset for cv.clip and cv.clipu
+		     ALU luimm5 [24...20]	 */
+	    case 'b':
+	      if (args[1] == '1')
+		{
+		  ++args;
+		  my_getExpression (imm_expr, s);
+		  if ((imm_expr->X_op != O_symbol && imm_expr->X_op != O_constant)
+		      || reg_lookup (&s, RCLASS_GPR, &regno))
+		    as_bad(_("%s immediate value must be a constant or label"),
+			   ip->insn_mo->name);
+		  s = expr_end;
+		  if (imm_expr->X_op == O_constant)
+		    {
+		      if (imm_expr->X_add_number < 0 ||
+			  ((imm_expr->X_add_number>>1) > 0x07FF))
+			as_bad (_("%ld constant out of range for %s, range:[0, %d]"),
+				imm_expr->X_add_number, ip->insn_mo->name, 0xFFE);
+		      if ((imm_expr->X_add_number % 2) == 1)
+			{
+			  as_warn (_("constant for %s must be even: %ld truncated to %ld"),
+				   ip->insn_mo->name, imm_expr->X_add_number,
+				   imm_expr->X_add_number-1);
+			  imm_expr->X_add_number--;
+			}
+		      INSERT_OPERAND (IMM12, *ip, (imm_expr->X_add_number>>1));
+		    }
+		  else
+		    *imm_reloc = BFD_RELOC_RISCV_CVPCREL_UI12;
+		}
+	      else if (args[1] == '2')
+		{
+		  ++args;
+		  my_getExpression (imm_expr, s);
+		  if ((imm_expr->X_op != O_symbol && imm_expr->X_op != O_constant)
+		      || reg_lookup (&s, RCLASS_GPR, &regno))
+		    as_bad(_("%s immediate value must be a constant or label"),
+			   ip->insn_mo->name);
+		  s = expr_end;
+		  if (imm_expr->X_op == O_constant)
+		    {
+		      if (imm_expr->X_add_number < 0 ||
+			  ((imm_expr->X_add_number>>1) > 0xF))
+			as_bad (_("%ld constant out of range for "
+				  "cv.setupi, range:[0, %d]"),
+				imm_expr->X_add_number, 0x1E);
+		      if ((imm_expr->X_add_number % 2) == 1)
+			{
+			  as_warn (_("constant for cv.setupi must be even: "
+				     "%ld truncated to %ld"),
+				   imm_expr->X_add_number,
+				   imm_expr->X_add_number-1);
+			  imm_expr->X_add_number--;
+			}
+		      INSERT_OPERAND (IMM5, *ip, (imm_expr->X_add_number>>1));
+		    }
+		  else *imm_reloc = BFD_RELOC_RISCV_CVPCREL_URS1;
+		}
+	      else if (args[1] == '3')
+		{
+		  my_getExpression (imm_expr, s);
+		  check_absolute_expr (ip, imm_expr, FALSE);
+		  s = expr_end;
+		  if (imm_expr->X_add_number<0 || imm_expr->X_add_number>31) break;
+		  ip->insn_opcode |= ENCODE_CV_MAC_UIMM5 (imm_expr->X_add_number);
+		  ++args;
+		}
+	      else if (args[1] == 'i')
+		{
+		  my_getExpression (imm_expr, s);
+		  check_absolute_expr (ip, imm_expr, FALSE);
+		  s = expr_end;
+		  if (imm_expr->X_add_number<0 || imm_expr->X_add_number>31) break;
+		  ip->insn_opcode |= ENCODE_CV_ALU_UIMM5 (imm_expr->X_add_number);
+		  ++args;
+		}
+	      else
+		{
+		  my_getExpression (imm_expr, s);
+		  s = expr_end;
+		}
+	      continue;
 	    case 'B':
 	      my_getExpression (imm_expr, s);
 	      normalize_constant_expr (imm_expr);
@@ -2535,11 +2679,30 @@ riscv_ip (char *str, struct riscv_cl_insn *ip, expressionS *imm_expr,
 	        *imm_reloc = BFD_RELOC_32;
 	      s = expr_end;
 	      continue;
-
-	    case 'j': /* Sign-extended immediate.  */
-	      p = percent_op_itype;
-	      *imm_reloc = BFD_RELOC_RISCV_LO12_I;
-	      goto alu_op;
+	    case 'j': /* Unsigned immediate.  */
+	      /* ji is CORE-V Specific.  */
+	      if (args[1] == 'i')
+		{
+		  /* immediate loop count, we don't want to use
+		     BFD_RELOC_RISCV_LO12_I to avoid colliding with relaxation */
+		  ++args;
+		  my_getExpression (imm_expr, s);
+		  check_absolute_expr (ip, imm_expr, FALSE);
+		  s = expr_end;
+		  if (imm_expr->X_add_number >= (int) RISCV_IMM_REACH ||
+		      imm_expr->X_add_number < 0)
+		    as_bad (_("%ld constant out of range for %s, range:[0, %d]"),
+			    imm_expr->X_add_number, ip->insn_mo->name,
+			    ((int) RISCV_IMM_REACH) -1);
+		  INSERT_OPERAND (IMM12, *ip, imm_expr->X_add_number);
+		  continue;
+		}
+	      else
+		{
+		  p = percent_op_itype;
+		  *imm_reloc = BFD_RELOC_RISCV_LO12_I;
+		  goto alu_op;
+		}
 	    case 'q': /* Store displacement.  */
 	      p = percent_op_stype;
 	      *imm_reloc = BFD_RELOC_RISCV_LO12_S;
@@ -3149,6 +3312,39 @@ md_apply_fix (fixS *fixP, valueT *valP, segT seg ATTRIBUTE_UNUSED)
 	  bfd_vma target = S_GET_VALUE (fixP->fx_addsy) + *valP;
 	  bfd_vma delta = target - md_pcrel_from (fixP);
 	  bfd_putl32 (bfd_getl32 (buf) | ENCODE_JTYPE_IMM (delta), buf);
+	}
+      break;
+
+    /* CORE-V Specific.  */
+    case BFD_RELOC_RISCV_CVPCREL_UI12:
+      if (fixP->fx_addsy)
+	{
+	  reloc_howto_type *howto;
+	  bfd_reloc_status_type r;
+
+	  /* Fill in a tentative value to improve objdump readability.  */
+	  howto = bfd_reloc_type_lookup (stdoutput, fixP->fx_r_type);
+	  bfd_vma target = S_GET_VALUE (fixP->fx_addsy) + *valP;
+	  bfd_vma delta = (target - md_pcrel_from (fixP)) >> howto->rightshift;
+	  r = bfd_check_overflow (howto->complain_on_overflow, 12, 0, 32, delta);
+	  if (r != bfd_reloc_overflow)
+	    bfd_putl32 (bfd_getl32 (buf) | ENCODE_ITYPE_IMM (delta), buf);
+	}
+      break;
+
+    case BFD_RELOC_RISCV_CVPCREL_URS1:
+      if (fixP->fx_addsy)
+	{
+	  reloc_howto_type *howto;
+	  bfd_reloc_status_type r;
+
+	  /* Fill in a tentative value to improve objdump readability.  */
+	  howto = bfd_reloc_type_lookup (stdoutput, fixP->fx_r_type);
+	  bfd_vma target = S_GET_VALUE (fixP->fx_addsy) + *valP;
+	  bfd_vma delta = (target - md_pcrel_from (fixP)) >> howto->rightshift;
+	  r = bfd_check_overflow (howto->complain_on_overflow, 5, 0, 32, delta);
+	  if (r != bfd_reloc_overflow)
+	    bfd_putl32 (bfd_getl32 (buf) | ENCODE_CV_HWLP_UIMM5 (delta), buf);
 	}
       break;
 

@@ -4,6 +4,13 @@
    Contributed by Andrew Waterman (andrew@sifive.com).
    Based on MIPS target.
 
+   Modified for CORE-V by:
+   Mary Bennett (mary.bennett@embecosm.com)
+   Pietra Ferreira (pietra.ferreira@embecosm.com)
+   Jessica Mills (jessica.mills@embecosm.com)
+
+   Some of these changes are (C) Open Hardware Group, pending FSF assignment.
+
    This file is part of the GNU opcodes library.
 
    This library is free software; you can redistribute it and/or modify
@@ -827,6 +834,72 @@ const struct riscv_opcode riscv_opcodes[] =
 {"clmulh",     0, INSN_CLASS_ZBC,  "d,s,t", MATCH_CLMULH, MASK_CLMULH, match_opcode, 0 },
 {"clmulr",     0, INSN_CLASS_ZBC,  "d,s,t", MATCH_CLMULR, MASK_CLMULR, match_opcode, 0 },
 
+
+/* CORE-V Specific Opcodes.  */
+/* Hardware loops  */
+{"cv.starti", 0, INSN_CLASS_COREV_HWLP, "di,b1",    MATCH_CV_STARTI, MASK_CV_STARTI, match_opcode, 0},
+{"cv.endi",   0, INSN_CLASS_COREV_HWLP, "di,b1",    MATCH_CV_ENDI,   MASK_CV_ENDI,   match_opcode, 0},
+{"cv.count",  0, INSN_CLASS_COREV_HWLP, "di,s",     MATCH_CV_COUNT,  MASK_CV_COUNT,  match_opcode, 0},
+{"cv.counti", 0, INSN_CLASS_COREV_HWLP, "di,ji",    MATCH_CV_COUNTI, MASK_CV_COUNTI, match_opcode, 0},
+{"cv.setup",  0, INSN_CLASS_COREV_HWLP, "di,s,b1",  MATCH_CV_SETUP,  MASK_CV_SETUP,  match_opcode, 0},
+{"cv.setupi", 0, INSN_CLASS_COREV_HWLP, "di,ji,b2", MATCH_CV_SETUPI, MASK_CV_SETUPI, match_opcode, 0},
+
+/* Multiply accumulate */
+{"cv.mac",      0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MAC,	MASK_CV_MACMSU,	 match_opcode, 0},
+{"cv.msu",      0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MSU,	MASK_CV_MACMSU,	 match_opcode, 0},
+{"cv.muls",     0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MULS,	MASK_CV_MULSH,	 match_opcode, 0},
+{"cv.mulhhs",   0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MULHHS,	MASK_CV_MULSH,	 match_opcode, 0},
+{"cv.mulsn",    0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULSN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulhhsn",  0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULHHSN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulsrn",   0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULSRN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulhhsrn", 0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULHHSRN, MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulu",     0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MULU,	MASK_CV_MULSH,	 match_opcode, 0},
+{"cv.mulhhu",   0, INSN_CLASS_COREV_MAC, "d,s,t",    MATCH_CV_MULHHU,	MASK_CV_MULSH,	 match_opcode, 0},
+{"cv.mulun",    0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULUN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulhhun",  0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULHHUN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulurn",   0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULURN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.mulhhurn", 0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MULHHURN, MASK_CV_MULMACN, match_opcode, 0},
+{"cv.macsn",    0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACSN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.machhsn",  0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACHHSN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.macsrn",   0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACSRN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.machhsrn", 0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACHHSRN, MASK_CV_MULMACN, match_opcode, 0},
+{"cv.macun",    0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACUN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.machhun",  0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACHHUN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.macurn",   0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACURN,	MASK_CV_MULMACN, match_opcode, 0},
+{"cv.machhurn", 0, INSN_CLASS_COREV_MAC, "d,s,t,b3", MATCH_CV_MACHHURN, MASK_CV_MULMACN, match_opcode, 0},
+
+/* General ALU operations */
+{"cv.abs",     0, INSN_CLASS_COREV_ALU, "d,s",      MATCH_CV_ABS,     MASK_CV_ABS,  match_opcode, 0},
+{"cv.exths",   0, INSN_CLASS_COREV_ALU, "d,s",      MATCH_CV_MIN,     MASK_CV_ABS,  match_opcode, 0},
+{"cv.exthz",   0, INSN_CLASS_COREV_ALU, "d,s",      MATCH_CV_MINU,    MASK_CV_ABS,  match_opcode, 0},
+{"cv.extbs",   0, INSN_CLASS_COREV_ALU, "d,s",      MATCH_CV_MAX,     MASK_CV_ABS,  match_opcode, 0},
+{"cv.extbz",   0, INSN_CLASS_COREV_ALU, "d,s",      MATCH_CV_MAXU,    MASK_CV_ABS,  match_opcode, 0},
+{"cv.slet",    0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SLET,    MASK_CV_SLET, match_opcode, 0},
+{"cv.sletu",   0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SLETU,   MASK_CV_SLET, match_opcode, 0},
+{"cv.min",     0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_MIN,     MASK_CV_SLET, match_opcode, 0},
+{"cv.minu",    0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_MINU,    MASK_CV_SLET, match_opcode, 0},
+{"cv.max",     0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_MAX,     MASK_CV_SLET, match_opcode, 0},
+{"cv.maxu",    0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_MAXU,    MASK_CV_SLET, match_opcode, 0},
+{"cv.clip",    0, INSN_CLASS_COREV_ALU, "d,s,bi",   MATCH_CV_CLIP,    MASK_CV_SLET, match_opcode, 0},
+{"cv.clipu",   0, INSN_CLASS_COREV_ALU, "d,s,bi",   MATCH_CV_CLIPU,   MASK_CV_SLET, match_opcode, 0},
+{"cv.clipr",   0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_CLIPR,   MASK_CV_SLET, match_opcode, 0},
+{"cv.clipur",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_CLIPUR,  MASK_CV_SLET, match_opcode, 0},
+{"cv.addn",    0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_ADDN,    MASK_CV_ADDN, match_opcode, 0},
+{"cv.addun",   0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_ADDUN,   MASK_CV_ADDN, match_opcode, 0},
+{"cv.addunr",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_ADDUNR,  MASK_CV_SLET, match_opcode, 0},
+{"cv.addrn",   0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_ADDRN,   MASK_CV_ADDN, match_opcode, 0},
+{"cv.addurn",  0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_ADDURN,  MASK_CV_ADDN, match_opcode, 0},
+{"cv.addnr",   0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_ADDNR,   MASK_CV_SLET, match_opcode, 0},
+{"cv.addrnr",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_ADDRNR,  MASK_CV_SLET, match_opcode, 0},
+{"cv.addurnr", 0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_ADDURNR, MASK_CV_SLET, match_opcode, 0},
+{"cv.subn",    0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_SUBN,    MASK_CV_ADDN, match_opcode, 0},
+{"cv.subun",   0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_SUBUN,   MASK_CV_ADDN, match_opcode, 0},
+{"cv.subrn",   0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_SUBRN,   MASK_CV_ADDN, match_opcode, 0},
+{"cv.suburn",  0, INSN_CLASS_COREV_ALU, "d,s,t,b3", MATCH_CV_SUBURN,  MASK_CV_ADDN, match_opcode, 0},
+{"cv.subnr",   0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SUBNR,   MASK_CV_SLET, match_opcode, 0},
+{"cv.subunr",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SUBUNR,  MASK_CV_SLET, match_opcode, 0},
+{"cv.subrnr",  0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SUBRNR,  MASK_CV_SLET, match_opcode, 0},
+{"cv.suburnr", 0, INSN_CLASS_COREV_ALU, "d,s,t",    MATCH_CV_SUBURNR, MASK_CV_SLET, match_opcode, 0},
 
 /* Terminate the list.  */
 {0, 0, INSN_CLASS_NONE, 0, 0, 0, 0, 0}

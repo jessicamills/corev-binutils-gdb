@@ -1,0 +1,52 @@
+2021-01-27  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* config/tc-riscv.c (md_apply_fix): Remove unnecessary overflow check
+	for BFD_RELOC_RISCV_CVPCREL_UI12 & BFD_RELOC_RISCV_CVPCREL_URS1.
+
+2020-11-24  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* doc/c-riscv.texi: Add details on hardware loop,
+	multiply-accumulate and general ALU ops ISA options.
+
+2020-11-20  Pietra Ferreira  <pietra.ferreira@embecosm.com>
+
+	* config/tc-riscv.c (riscv_multi_subset_supports): Add general
+	ALU ops instruction class.
+	(validate_riscv_insn, riscv_ip): Add general ALU ops operands.
+
+2020-11-19  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* config/tc-riscv.c (riscv_ip): Bug fix in hardware loop operand
+	boundary checks - b1 and b2.
+
+2020-11-11  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* config/tc-riscv.c (riscv_multi_subset_supports): Add multiply
+	accumulate instruction class.
+	(validate_riscv_insn, riscv_ip): Add multiply accumulate operands.
+
+2020-11-10  Mary Bennett  <mary.bennett@embecosm.com>
+
+	* config/tc-riscv.c (validate_riscv_insn): Renamed macros for clarity -
+	ENCODE_I1TYPE_UIMM -> ENCODE_CV_HWLP_UIMM5
+	ENCODE_I1TYPE_LN   -> ENCODE_CV_HWLP_LN
+	* config/tc-riscv.c (md_apply_fix): Renamed macros for clarity -
+	ENCODE_I1TYPE_UIMM -> ENCODE_CV_HWLP_UIMM5
+
+2020-10-05  Mary Bennett  <mary.bennett@embecosm.com>
+
+	* config/tc-riscv.c (riscv_multi_subset_supports): Replace general
+	CORE-V instruction class with hardware loop instruction class.
+	(validate_riscv_insn): Fix issue arising from incorrect hardware loop
+	masks.
+	(riscv_ip): Improve error messages.
+
+2020-09-10  Pietra Ferreira  <pietra.ferreira@embecosm.com>
+
+	* config/tc-riscv.c (riscv_multi_subset_supports): Add CORE-V
+	instruction class.
+	(validate_riscv_insn, riscv_ip): Add hardware loop operands.
+	(md_apply_fix): Add hardware loop relocations
+	BFD_RELOC_RISCV_CVPCREL_UI12 and BFD_RELOC_RISCV_CVPCREL_URS1.
+	* doc/c-riscv.texi: Noted Xcorev as additional ISA extension
+	 for CORE-V.

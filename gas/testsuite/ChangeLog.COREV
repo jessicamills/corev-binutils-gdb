@@ -1,0 +1,668 @@
+2021-01-27  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-hwlp-fail-operand-07.l: Remove obsolete
+	BFD_RELOC_RISCV_CVPCREL_UI12 overflow error message.
+
+2021-01-15  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-mac-fail-march.d: Added new test.
+	* gas/riscv/cv-mac-fail-march.l: Likewise.
+	* gas/riscv/cv-mac-fail-march.s: Likewise.
+	* gas/riscv/cv-mac-fail-operand-01.d: Likewise.
+	* gas/riscv/cv-mac-fail-operand-01.l: Likewise.
+	* gas/riscv/cv-mac-fail-operand-01.s: Likewise.
+	* gas/riscv/cv-mac-fail-operand-02.d: Likewise.
+	* gas/riscv/cv-mac-fail-operand-02.l: Likewise.
+	* gas/riscv/cv-mac-fail-operand-02.s: Likewise.
+	* gas/riscv/cv-mac-fail-operand-03.d: Likewise.
+	* gas/riscv/cv-mac-fail-operand-03.l: Likewise.
+	* gas/riscv/cv-mac-fail-operand-03.s: Likewise.
+	* gas/riscv/cv-mac-fail-operand-04.d: Likewise.
+	* gas/riscv/cv-mac-fail-operand-04.l: Likewise.
+	* gas/riscv/cv-mac-fail-operand-04.s: Likewise.
+	* gas/riscv/cv-mac-fail-operand-05.d: Likewise.
+	* gas/riscv/cv-mac-fail-operand-05.l: Likewise.
+	* gas/riscv/cv-mac-fail-operand-05.s: Likewise.
+	* gas/riscv/cv-mac-01.d: Deleted, content subsumed into
+	cv-mac-fail-operand-01.d.
+	* gas/riscv/cv-mac-01.l: Deleted, content subsumed into
+	cv-mac-fail-operand-01.l.
+	* gas/riscv/cv-mac-01.s: Deleted, content subsumed into
+	cv-mac-fail-operand-01.s.
+	* gas/riscv/cv-mac-02.d: Deleted, content subsumed into
+	cv-mac-fail-operand-02.d.
+	* gas/riscv/cv-mac-02.l: Deleted, content subsumed into
+	cv-mac-fail-operand-02.l.
+	* gas/riscv/cv-mac-02.s: Deleted, content subsumed into
+	cv-mac-fail-operand-02.s.
+	* gas/riscv/cv-mac-03.d: Deleted, content subsumed into
+	cv-mac-fail-operand-03.d.
+	* gas/riscv/cv-mac-03.l: Deleted, content subsumed into
+	cv-mac-fail-operand-03.l.
+	* gas/riscv/cv-mac-03.s: Deleted, content subsumed into
+	cv-mac-fail-operand-03.s.
+	* gas/riscv/cv-mac-04.d: Deleted, content subsumed into
+	cv-mac-fail-operand-04.d.
+	* gas/riscv/cv-mac-04.l: Deleted, content subsumed into
+	cv-mac-fail-operand-04.l.
+	* gas/riscv/cv-mac-04.s: Deleted, content subsumed into
+	cv-mac-fail-operand-04.s.
+	* gas/riscv/cv-mac-05.d: Deleted, content subsumed into
+	cv-mac-fail-operand-04.d.
+	* gas/riscv/cv-mac-05.l: Deleted, content subsumed into
+	cv-mac-fail-operand-04.l.
+	* gas/riscv/cv-mac-05.s: Deleted, content subsumed into
+	cv-mac-fail-operand-04.s.
+	* gas/riscv/cv-mac-06.d: Deleted, content subsumed into
+	cv-mac-fail-operand-05.d.
+	* gas/riscv/cv-mac-06.l: Deleted, content subsumed into
+	cv-mac-fail-operand-05.l.
+	* gas/riscv/cv-mac-06.s: Deleted, content subsumed into
+	cv-mac-fail-operand-05.s.
+	* gas/riscv/cv-mac-07.d: Deleted, content subsumed into
+	cv-mac-fail-operand-04.d.
+	* gas/riscv/cv-mac-07.l: Deleted, content subsumed into
+	cv-mac-fail-operand-04.l.
+	* gas/riscv/cv-mac-07.s: Deleted, content subsumed into
+	cv-mac-fail-operand-04.s.
+	* gas/riscv/cv-mac-08.d: Deleted, content subsumed into
+	cv-mac-fail-operand-04.d.
+	* gas/riscv/cv-mac-08.l: Deleted, content subsumed into
+	cv-mac-fail-operand-04.l.
+	* gas/riscv/cv-mac-08.s: Deleted, content subsumed into
+	cv-mac-fail-operand-04.s.
+
+2021-01-15  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-alu-fail-march.d: Added new test.
+	* gas/riscv/cv-alu-fail-march.l: Likewise.
+	* gas/riscv/cv-alu-fail-march.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-01.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-01.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-01.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-02.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-02.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-02.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-03.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-03.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-03.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-04.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-04.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-04.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-05.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-05.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-05.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-06.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-06.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-06.s: Likewise.
+	* gas/riscv/cv-alu-fail-operand-07.d: Likewise.
+	* gas/riscv/cv-alu-fail-operand-07.l: Likewise.
+	* gas/riscv/cv-alu-fail-operand-07.s: Likewise.
+	* gas/riscv/cv-alu-01.d: Deleted, content subsumed into
+	cv-alu-fail-operand-01.d.
+	* gas/riscv/cv-alu-01.l: Deleted, content subsumed into
+	cv-alu-fail-operand-01.l.
+	* gas/riscv/cv-alu-01.s: Deleted, content subsumed into
+	cv-alu-fail-operand-01.s.
+	* gas/riscv/cv-alu-02.d: Deleted, content subsumed into
+	cv-alu-fail-operand-02.d.
+	* gas/riscv/cv-alu-02.l: Deleted, content subsumed into
+	cv-alu-fail-operand-02.l.
+	* gas/riscv/cv-alu-02.s: Deleted, content subsumed into
+	cv-alu-fail-operand-02.s.
+	* gas/riscv/cv-alu-03.d: Deleted, content subsumed into
+	cv-alu-fail-operand-03.d.
+	* gas/riscv/cv-alu-03.l: Deleted, content subsumed into
+	cv-alu-fail-operand-03.l.
+	* gas/riscv/cv-alu-03.s: Deleted, content subsumed into
+	cv-alu-fail-operand-03.s.
+	* gas/riscv/cv-alu-04.d: Deleted, content subsumed into
+	cv-alu-fail-operand-04.d.
+	* gas/riscv/cv-alu-04.l: Deleted, content subsumed into
+	cv-alu-fail-operand-04.l.
+	* gas/riscv/cv-alu-04.s: Deleted, content subsumed into
+	cv-alu-fail-operand-04.s.
+	* gas/riscv/cv-alu-05.d: Deleted, content subsumed into
+	cv-alu-fail-operand-05.d.
+	* gas/riscv/cv-alu-05.l: Deleted, content subsumed into
+	cv-alu-fail-operand-05.l.
+	* gas/riscv/cv-alu-05.s: Deleted, content subsumed into
+	cv-alu-fail-operand-05.s.
+	* gas/riscv/cv-alu-06.d: Deleted, content subsumed into
+	cv-alu-fail-operand-06.d.
+	* gas/riscv/cv-alu-06.l: Deleted, content subsumed into
+	cv-alu-fail-operand-06.l.
+	* gas/riscv/cv-alu-06.s: Deleted, content subsumed into
+	cv-alu-fail-operand-06.s.
+	* gas/riscv/cv-alu-07.d: Deleted, content subsumed into
+	cv-alu-fail-operand-06.d.
+	* gas/riscv/cv-alu-07.l: Deleted, content subsumed into
+	cv-alu-fail-operand-06.l.
+	* gas/riscv/cv-alu-07.s: Deleted, content subsumed into
+	cv-alu-fail-operand-06.s.
+	* gas/riscv/cv-alu-08.d: Deleted, content subsumed into
+	cv-alu-fail-operand-07.d.
+	* gas/riscv/cv-alu-08.l: Deleted, content subsumed into
+	cv-alu-fail-operand-07.l.
+	* gas/riscv/cv-alu-08.s: Deleted, content subsumed into
+	cv-alu-fail-operand-07.s.
+	* gas/riscv/cv-alu-09.d: Deleted, content subsumed into
+	cv-alu-fail-operand-07.d.
+	* gas/riscv/cv-alu-09.l: Deleted, content subsumed into
+	cv-alu-fail-operand-07.l.
+	* gas/riscv/cv-alu-09.s: Deleted, content subsumed into
+	cv-alu-fail-operand-07.s.
+	* gas/riscv/cv-alu-10.d: Deleted, content subsumed into
+	cv-alu-fail-operand-06.d.
+	* gas/riscv/cv-alu-10.l: Deleted, content subsumed into
+	cv-alu-fail-operand-06.l.
+	* gas/riscv/cv-alu-10.s: Deleted, content subsumed into
+	cv-alu-fail-operand-06.s.
+	* gas/riscv/cv-alu-11.d: Deleted, content subsumed into
+	cv-alu-fail-operand-06.d.
+	* gas/riscv/cv-alu-11.l: Deleted, content subsumed into
+	cv-alu-fail-operand-06.l.
+	* gas/riscv/cv-alu-11.s: Deleted, content subsumed into
+	cv-alu-fail-operand-06.s.
+	* gas/riscv/cv-alu-12.d: Deleted, content subsumed into
+	cv-alu-fail-operand-07.d.
+	* gas/riscv/cv-alu-12.l: Deleted, content subsumed into
+	cv-alu-fail-operand-07.l.
+	* gas/riscv/cv-alu-12.s: Deleted, content subsumed into
+	cv-alu-fail-operand-07.s.
+	* gas/riscv/cv-alu-13.d: Deleted, content subsumed into
+	cv-alu-fail-operand-07.d.
+	* gas/riscv/cv-alu-13.l: Deleted, content subsumed into
+	cv-alu-fail-operand-07.l.
+	* gas/riscv/cv-alu-13.s: Deleted, content subsumed into
+	cv-alu-fail-operand-07.s.
+
+2021-01-15  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-hwloop-count.d: Renamed to cv-hwlp-count.d.
+	* gas/riscv/cv-hwloop-count.s: Renamed to cv-hwlp-count.s.
+	* gas/riscv/cv-hwloop-counti.d: Renamed to cv-hwlp-counti.d.
+	* gas/riscv/cv-hwloop-counti.s: Renamed to cv-hwlp-counti.s.
+	* gas/riscv/cv-hwloop-endi.d: Renamed to cv-hwlp-endi.d.
+	* gas/riscv/cv-hwloop-endi.s: Renamed to cv-hwlp-endi.s.
+	* gas/riscv/cv-hwloop-setup.d: Renamed to cv-hwlp-setup.d.
+	* gas/riscv/cv-hwloop-setup.s: Renamed to cv-hwlp-setup.s.
+	* gas/riscv/cv-hwloop-setupi.d: Renamed to cv-hwlp-setupi.d.
+	* gas/riscv/cv-hwloop-setupi.s: Renamed to cv-hwlp-setupi.s.
+	* gas/riscv/cv-hwloop-starti.d: Renamed to cv-hwlp-starti.d.
+	* gas/riscv/cv-hwloop-starti.s: Renamed to cv-hwlp-starti.s.
+	* gas/riscv/cv-hwlp-fail-march.d: Added new test.
+	* gas/riscv/cv-hwlp-fail-march.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-march.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-01.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-01.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-01.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-02.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-02.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-02.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-03.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-03.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-03.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-04.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-04.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-04.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-05.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-05.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-05.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-06.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-06.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-06.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-07.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-07.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-07.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-09.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-09.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-09.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-10.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-10.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-10.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-11.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-11.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-11.s: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-12.d: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-12.l: Likewise.
+	* gas/riscv/cv-hwlp-fail-operand-12.s: Likewise.
+	* gas/riscv/cv-hwloop-01.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.d.
+	* gas/riscv/cv-hwloop-01.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.l.
+	* gas/riscv/cv-hwloop-01.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.s.
+	* gas/riscv/cv-hwloop-02.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.d.
+	* gas/riscv/cv-hwloop-02.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.l.
+	* gas/riscv/cv-hwloop-02.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.s.
+	* gas/riscv/cv-hwloop-03.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-02.d.
+	* gas/riscv/cv-hwloop-03.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-02.l.
+	* gas/riscv/cv-hwloop-03.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-02.s.
+	* gas/riscv/cv-hwloop-04.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.d.
+	* gas/riscv/cv-hwloop-04.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.l.
+	* gas/riscv/cv-hwloop-04.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.s.
+	* gas/riscv/cv-hwloop-05.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.d.
+	* gas/riscv/cv-hwloop-05.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.l.
+	* gas/riscv/cv-hwloop-05.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.s.
+	* gas/riscv/cv-hwloop-06.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-04.d.
+	* gas/riscv/cv-hwloop-06.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-04.l.
+	* gas/riscv/cv-hwloop-06.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-04.s.
+	* gas/riscv/cv-hwloop-07.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.d.
+	* gas/riscv/cv-hwloop-07.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.l.
+	* gas/riscv/cv-hwloop-07.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.s.
+	* gas/riscv/cv-hwloop-08.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.d.
+	* gas/riscv/cv-hwloop-08.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.l.
+	* gas/riscv/cv-hwloop-08.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.s.
+	* gas/riscv/cv-hwloop-09.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.d.
+	* gas/riscv/cv-hwloop-09.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.l.
+	* gas/riscv/cv-hwloop-09.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.s.
+	* gas/riscv/cv-hwloop-10.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.d.
+	* gas/riscv/cv-hwloop-10.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.l.
+	* gas/riscv/cv-hwloop-10.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.s.
+	* gas/riscv/cv-hwloop-11.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-07.d.
+	* gas/riscv/cv-hwloop-11.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-07.l.
+	* gas/riscv/cv-hwloop-11.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-07.s.
+	* gas/riscv/cv-hwloop-12.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-08.d.
+	* gas/riscv/cv-hwloop-12.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-08.l.
+	* gas/riscv/cv-hwloop-12.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-08.s.
+	* gas/riscv/cv-hwloop-13.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-09.d.
+	* gas/riscv/cv-hwloop-13.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-09.l.
+	* gas/riscv/cv-hwloop-13.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-09.s.
+	* gas/riscv/cv-hwloop-14.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-10.d.
+	* gas/riscv/cv-hwloop-14.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-10.l.
+	* gas/riscv/cv-hwloop-14.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-10.s.
+	* gas/riscv/cv-hwloop-15.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-11.d.
+	* gas/riscv/cv-hwloop-15.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-11.l.
+	* gas/riscv/cv-hwloop-15.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-11.s.
+	* gas/riscv/cv-hwloop-16.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.d.
+	* gas/riscv/cv-hwloop-16.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.l.
+	* gas/riscv/cv-hwloop-16.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.s.
+	* gas/riscv/cv-hwloop-17.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.d.
+	* gas/riscv/cv-hwloop-17.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.l.
+	* gas/riscv/cv-hwloop-17.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-01.s.
+	* gas/riscv/cv-hwloop-18.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.d.
+	* gas/riscv/cv-hwloop-18.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.l.
+	* gas/riscv/cv-hwloop-18.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.s.
+	* gas/riscv/cv-hwloop-19.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.d.
+	* gas/riscv/cv-hwloop-19.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.l.
+	* gas/riscv/cv-hwloop-19.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-03.s.
+	* gas/riscv/cv-hwloop-20.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.d.
+	* gas/riscv/cv-hwloop-20.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.l.
+	* gas/riscv/cv-hwloop-20.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.s.
+	* gas/riscv/cv-hwloop-21.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.d.
+	* gas/riscv/cv-hwloop-21.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.l.
+	* gas/riscv/cv-hwloop-21.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-05.s.
+	* gas/riscv/cv-hwloop-22.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.d.
+	* gas/riscv/cv-hwloop-22.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.l.
+	* gas/riscv/cv-hwloop-22.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.s.
+	* gas/riscv/cv-hwloop-23.d: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.d.
+	* gas/riscv/cv-hwloop-23.l: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.l.
+	* gas/riscv/cv-hwloop-23.s: Deleted, content subsumed into
+	cv-hwlp-fail-operand-06.s.
+
+2021-01-11  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-mac-machhsn.d: Removed obsolete instruction cv.machhs.
+	* gas/riscv/cv-mac-machhun.d: Removed obsolete instruction cv.machhu.
+	* gas/riscv/cv-mac-macsn.d: Removed obsolete instruction cv.macs.
+	* gas/riscv/cv-mac-macun.d: Removed obsolete instruction cv.macu.
+
+2020-11-20  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-alu-01.d: Added new test.
+	* gas/riscv/cv-alu-01.l: Likewise.
+	* gas/riscv/cv-alu-01.s: Likewise.
+	* gas/riscv/cv-alu-02.d: Likewise.
+	* gas/riscv/cv-alu-02.l: Likewise.
+	* gas/riscv/cv-alu-02.s: Likewise.
+	* gas/riscv/cv-alu-03.d: Likewise.
+	* gas/riscv/cv-alu-03.l: Likewise.
+	* gas/riscv/cv-alu-03.s: Likewise.
+	* gas/riscv/cv-alu-04.d: Likewise.
+	* gas/riscv/cv-alu-04.l: Likewise.
+	* gas/riscv/cv-alu-04.s: Likewise.
+	* gas/riscv/cv-alu-05.d: Likewise.
+	* gas/riscv/cv-alu-05.l: Likewise.
+	* gas/riscv/cv-alu-05.s: Likewise.
+	* gas/riscv/cv-alu-06.d: Likewise.
+	* gas/riscv/cv-alu-06.l: Likewise.
+	* gas/riscv/cv-alu-06.s: Likewise.
+	* gas/riscv/cv-alu-07.d: Likewise.
+	* gas/riscv/cv-alu-07.l: Likewise.
+	* gas/riscv/cv-alu-07.s: Likewise.
+	* gas/riscv/cv-alu-08.d: Likewise.
+	* gas/riscv/cv-alu-08.l: Likewise.
+	* gas/riscv/cv-alu-08.s: Likewise.
+	* gas/riscv/cv-alu-09.d: Likewise.
+	* gas/riscv/cv-alu-09.l: Likewise.
+	* gas/riscv/cv-alu-09.s: Likewise.
+	* gas/riscv/cv-alu-10.d: Likewise.
+	* gas/riscv/cv-alu-10.l: Likewise.
+	* gas/riscv/cv-alu-10.s: Likewise.
+	* gas/riscv/cv-alu-11.d: Likewise.
+	* gas/riscv/cv-alu-11.l: Likewise.
+	* gas/riscv/cv-alu-11.s: Likewise.
+	* gas/riscv/cv-alu-12.d: Likewise.
+	* gas/riscv/cv-alu-12.l: Likewise.
+	* gas/riscv/cv-alu-12.s: Likewise.
+	* gas/riscv/cv-alu-13.d: Likewise.
+	* gas/riscv/cv-alu-13.l: Likewise.
+	* gas/riscv/cv-alu-13.s: Likewise.
+	* gas/riscv/cv-alu-abs.d: Likewise.
+	* gas/riscv/cv-alu-abs.s: Likewise.
+	* gas/riscv/cv-alu-addn.d: Likewise.
+	* gas/riscv/cv-alu-addn.s: Likewise.
+	* gas/riscv/cv-alu-addnr.d: Likewise.
+	* gas/riscv/cv-alu-addnr.s: Likewise.
+	* gas/riscv/cv-alu-addrn.d: Likewise.
+	* gas/riscv/cv-alu-addrn.s: Likewise.
+	* gas/riscv/cv-alu-addrnr.d: Likewise.
+	* gas/riscv/cv-alu-addrnr.s: Likewise.
+	* gas/riscv/cv-alu-addun.d: Likewise.
+	* gas/riscv/cv-alu-addun.s: Likewise.
+	* gas/riscv/cv-alu-addunr.d: Likewise.
+	* gas/riscv/cv-alu-addunr.s: Likewise.
+	* gas/riscv/cv-alu-addurn.d: Likewise.
+	* gas/riscv/cv-alu-addurn.s: Likewise.
+	* gas/riscv/cv-alu-addurnr.d: Likewise.
+	* gas/riscv/cv-alu-addurnr.s: Likewise.
+	* gas/riscv/cv-alu-clip.d: Likewise.
+	* gas/riscv/cv-alu-clip.s: Likewise.
+	* gas/riscv/cv-alu-clipr.d: Likewise.
+	* gas/riscv/cv-alu-clipr.s: Likewise.
+	* gas/riscv/cv-alu-clipu.d: Likewise.
+	* gas/riscv/cv-alu-clipu.s: Likewise.
+	* gas/riscv/cv-alu-clipur.d: Likewise.
+	* gas/riscv/cv-alu-clipur.s: Likewise.
+	* gas/riscv/cv-alu-extbs.d: Likewise.
+	* gas/riscv/cv-alu-extbs.s: Likewise.
+	* gas/riscv/cv-alu-extbz.d: Likewise.
+	* gas/riscv/cv-alu-extbz.s: Likewise.
+	* gas/riscv/cv-alu-exths.d: Likewise.
+	* gas/riscv/cv-alu-exths.s: Likewise.
+	* gas/riscv/cv-alu-exthz.d: Likewise.
+	* gas/riscv/cv-alu-exthz.s: Likewise.
+	* gas/riscv/cv-alu-march-rv32i-xcorev.d: Likewise.
+	* gas/riscv/cv-alu-march-rv32i-xcorev.s: Likewise.
+	* gas/riscv/cv-alu-max.d: Likewise.
+	* gas/riscv/cv-alu-max.s: Likewise.
+	* gas/riscv/cv-alu-maxu.d: Likewise.
+	* gas/riscv/cv-alu-maxu.s: Likewise.
+	* gas/riscv/cv-alu-min.d: Likewise.
+	* gas/riscv/cv-alu-min.s: Likewise.
+	* gas/riscv/cv-alu-minu.d: Likewise.
+	* gas/riscv/cv-alu-minu.s: Likewise.
+	* gas/riscv/cv-alu-slet.d: Likewise.
+	* gas/riscv/cv-alu-slet.s: Likewise.
+	* gas/riscv/cv-alu-sletu.d: Likewise.
+	* gas/riscv/cv-alu-sletu.s: Likewise.
+	* gas/riscv/cv-alu-subn.d: Likewise.
+	* gas/riscv/cv-alu-subn.s: Likewise.
+	* gas/riscv/cv-alu-subnr.d: Likewise.
+	* gas/riscv/cv-alu-subnr.s: Likewise.
+	* gas/riscv/cv-alu-subrn.d: Likewise.
+	* gas/riscv/cv-alu-subrn.s: Likewise.
+	* gas/riscv/cv-alu-subrnr.d: Likewise.
+	* gas/riscv/cv-alu-subrnr.s: Likewise.
+	* gas/riscv/cv-alu-subun.d: Likewise.
+	* gas/riscv/cv-alu-subun.s: Likewise.
+	* gas/riscv/cv-alu-subunr.d: Likewise.
+	* gas/riscv/cv-alu-subunr.s: Likewise.
+	* gas/riscv/cv-alu-suburn.d: Likewise.
+	* gas/riscv/cv-alu-suburn.s: Likewise.
+	* gas/riscv/cv-alu-suburnr.d: Likewise.
+	* gas/riscv/cv-alu-suburnr.s: Likewise.
+
+2020-11-19  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* cv-hwloop-16.d: Added new boundary test.
+	* cv-hwloop-16.l: Likewise.
+	* cv-hwloop-16.s: Likewise.
+	* cv-hwloop-17.d: Likewise.
+	* cv-hwloop-17.l: Likewise.
+	* cv-hwloop-17.s: Likewise.
+	* cv-hwloop-18.d: Likewise.
+	* cv-hwloop-18.l: Likewise.
+	* cv-hwloop-18.s: Likewise.
+	* cv-hwloop-19.d: Likewise.
+	* cv-hwloop-19.l: Likewise.
+	* cv-hwloop-19.s: Likewise.
+	* cv-hwloop-20.d: Likewise.
+	* cv-hwloop-20.l: Likewise.
+	* cv-hwloop-20.s: Likewise.
+	* cv-hwloop-21.d: Likewise.
+	* cv-hwloop-21.l: Likewise.
+	* cv-hwloop-21.s: Likewise.
+	* cv-hwloop-22.d: Likewise.
+	* cv-hwloop-22.l: Likewise.
+	* cv-hwloop-22.s: Likewise.
+	* cv-hwloop-23.d: Likewise.
+	* cv-hwloop-23.l: Likewise.
+	* cv-hwloop-23.s: Likewise.
+	* cv-hwloop-09.s: Fixed incorrect comment.
+	* cv-hwloop-10.s: Likewise.
+	* cv-mac-07.d: Added new boundary test.
+	* cv-mac-07.l: Likewise.
+	* cv-mac-07.s: Likewise.
+	* cv-mac-08.d: Likewise.
+	* cv-mac-08.l: Likewise.
+	* cv-mac-08.s: Likewise.
+	* cv-mac-05.l: Changed to non-boundary value.
+	* cv-mac-05.s: Likewise.
+
+2020-11-11  Jessica Mills  <jessica.mills@embecosm.com>
+
+	* gas/riscv/cv-mac-01.d: Added new test.
+	* gas/riscv/cv-mac-01.l: Likewise.
+	* gas/riscv/cv-mac-01.s: Likewise.
+	* gas/riscv/cv-mac-02.d: Likewise.
+	* gas/riscv/cv-mac-02.l: Likewise.
+	* gas/riscv/cv-mac-02.s: Likewise.
+	* gas/riscv/cv-mac-03.d: Likewise.
+	* gas/riscv/cv-mac-03.l: Likewise.
+	* gas/riscv/cv-mac-03.s: Likewise.
+	* gas/riscv/cv-mac-04.d: Likewise.
+	* gas/riscv/cv-mac-04.l: Likewise.
+	* gas/riscv/cv-mac-04.s: Likewise.
+	* gas/riscv/cv-mac-05.d: Likewise.
+	* gas/riscv/cv-mac-05.l: Likewise.
+	* gas/riscv/cv-mac-05.s: Likewise.
+	* gas/riscv/cv-mac-06.d: Likewise.
+	* gas/riscv/cv-mac-06.l: Likewise.
+	* gas/riscv/cv-mac-06.s: Likewise.
+	* gas/riscv/cv-mac-mac.d: Likewise.
+	* gas/riscv/cv-mac-mac.s: Likewise.
+	* gas/riscv/cv-mac-machhsn.d: Likewise.
+	* gas/riscv/cv-mac-machhsn.s: Likewise.
+	* gas/riscv/cv-mac-machhsrn.d: Likewise.
+	* gas/riscv/cv-mac-machhsrn.s: Likewise.
+	* gas/riscv/cv-mac-machhun.d: Likewise.
+	* gas/riscv/cv-mac-machhun.s: Likeiwse.
+	* gas/riscv/cv-mac-machhurn.d: Likewise.
+	* gas/riscv/cv-mac-machhurn.s: Likewise.
+	* gas/riscv/cv-mac-machhurn.d: Likewise.
+	* gas/riscv/cv-mac-machhurn.s: Likewise.
+	* gas/riscv/cv-mac-macsrn.d: Likewise.
+	* gas/riscv/cv-mac-macsrn.s: Likewise.
+	* gas/riscv/cv-mac-macun.d: Likewise.
+	* gas/riscv/cv-mac-macun.s: Likewise.
+	* gas/riscv/cv-mac-macurn.d: Likewise.
+	* gas/riscv/cv-mac-macurn.s: Likewise.
+	* gas/riscv/cv-mac-msu.d: Likewise.
+	* gas/riscv/cv-mac-msu.s: Likewise.
+	* gas/riscv/cv-mac-mulhhs.d: Likewise.
+	* gas/riscv/cv-mac-mulhhs.s: Likewise.
+	* gas/riscv/cv-mac-mulhhsn.d: Likewise.
+	* gas/riscv/cv-mac-mulhhsn.s: Likewise.
+	* gas/riscv/cv-mac-mulhhsrn.d: Likewise.
+	* gas/riscv/cv-mac-mulhhsrn.s: Likewise.
+	* gas/riscv/cv-mac-mulhhu.d: Likewise.
+	* gas/riscv/cv-mac-mulhhu.s: Likewise.
+	* gas/riscv/cv-mac-mulhhun.d: Likewise.
+	* gas/riscv/cv-mac-mulhhun.s: Likewise.
+	* gas/riscv/cv-mac-mulhhurn.d: Likewise.
+	* gas/riscv/cv-mac-mulhhurn.s: Likewise.
+	* gas/riscv/cv-mac-muls.d: Likewise.
+	* gas/riscv/cv-mac-muls.s: Likewise.
+	* gas/riscv/cv-mac-mulsn.d: Likewise.
+	* gas/riscv/cv-mac-mulsn.s: Likewise.
+	* gas/riscv/cv-mac-mulsrn.d: Likewise.
+	* gas/riscv/cv-mac-mulsrn.s: Likewise.
+	* gas/riscv/cv-mac-mulu.d: Likewise.
+	* gas/riscv/cv-mac-mulu.s: Likewise.
+	* gas/riscv/cv-mac-mulun.d: Likewise.
+	* gas/riscv/cv-mac-mulun.s: Likewise.
+	* gas/riscv/cv-mac-mulurn.d: Likewise.
+	* gas/riscv/cv-mac-mulurn.s: Likewise.
+	* gas/riscv/cv-mac-march-rv32i-xcorev.s: Likewise.
+	* gas/riscv/cv-mac-march-rv32i-xcorev.d: Likewise.
+	* gas/riscv/cv-hwloop-march-rv32i-xcorev.s: Renamed to seperate from
+	mac.
+	* gas/riscv/cv-hwloop-march-rv32i-xcorev.d: Likewise.
+
+2020-10-30  Mary Bennett  <mary.bennett@embecosm.com>
+
+	* gas/riscv/cv-hwloop-01.d: Changed march option to xcorehwlp.
+	* gas/riscv/cv-hwloop-02.d: Likewise.
+	* gas/riscv/cv-hwloop-03.d: Likewise.
+	* gas/riscv/cv-hwloop-04.d: Likewise.
+	* gas/riscv/cv-hwloop-05.d: Likewise.
+	* gas/riscv/cv-hwloop-06.d: Likewise.
+	* gas/riscv/cv-hwloop-07.d: Likewise.
+	* gas/riscv/cv-hwloop-08.d: Likewise.
+	* gas/riscv/cv-hwloop-count.d: Likewise.
+	* gas/riscv/cv-hwloop-counti.d: Likewise.
+	* gas/riscv/cv-hwloop-endi.d: Likewise.
+	* gas/riscv/cv-hwloop-setup.d: Likewise.
+	* gas/riscv/cv-hwloop-setupi.d: Likewise.
+	* gas/riscv/cv-hwloop-starti.d: Likewise.
+	* gas/riscv/cv-hwloop-09.d: Likewise.
+	* gas/riscv/cv-hwloop-10.d: Likewise.
+	* gas/riscv/cv-hwloop-11.d: Added new test.
+	* gas/riscv/cv-hwloop-11.l: Likewise.
+	* gas/riscv/cv-hwloop-11.s: Likewise.
+	* gas/riscv/cv-hwloop-12.d: Likewise.
+	* gas/riscv/cv-hwloop-12.l: Likewise.
+	* gas/riscv/cv-hwloop-12.s: Likewise.
+	* gas/riscv/cv-hwloop-13.d: Likewise.
+	* gas/riscv/cv-hwloop-13.l: Likewise.
+	* gas/riscv/cv-hwloop-13.s: Likewise.
+	* gas/riscv/cv-hwloop-14.d: Likewise.
+	* gas/riscv/cv-hwloop-14.l: Likewise.
+	* gas/riscv/cv-hwloop-14.s: Likewise.
+	* gas/riscv/cv-hwloop-15.d: Likewise.
+	* gas/riscv/cv-hwloop-15.l: Likewise.
+	* gas/riscv/cv-hwloop-15.s: Likewise.
+	* gas/riscv/cv-march-rv32i-xcorev.s: Added test for march option.
+	* gas/riscv/cv-march-rv32i-xcorev.d: Likewise.
+
+2020-09-10  Pietra Ferreira  <pietra.ferreira@embecosm.com>
+
+	* gas/riscv/cv-hwloop-01.d: Added new test.
+	* gas/riscv/cv-hwloop-01.l: Likewise.
+	* gas/riscv/cv-hwloop-01.s: Likewise.
+	* gas/riscv/cv-hwloop-02.d: Likewise.
+	* gas/riscv/cv-hwloop-02.l: Likewise.
+	* gas/riscv/cv-hwloop-02.s: Likewise.
+	* gas/riscv/cv-hwloop-03.d: Likewise.
+	* gas/riscv/cv-hwloop-03.l: Likewise.
+	* gas/riscv/cv-hwloop-03.s: Likewise.
+	* gas/riscv/cv-hwloop-04.d: Likewise.
+	* gas/riscv/cv-hwloop-04.l: Likewise.
+	* gas/riscv/cv-hwloop-04.s: Likewise.
+	* gas/riscv/cv-hwloop-05.d: Likewise.
+	* gas/riscv/cv-hwloop-05.l: Likewise.
+	* gas/riscv/cv-hwloop-05.s: Likewise.
+	* gas/riscv/cv-hwloop-06.d: Likewise.
+	* gas/riscv/cv-hwloop-06.l: Likewise.
+	* gas/riscv/cv-hwloop-06.s: Likewise.
+	* gas/riscv/cv-hwloop-07.d: Likewise.
+	* gas/riscv/cv-hwloop-07.l: Likewise.
+	* gas/riscv/cv-hwloop-07.s: Likewise.
+	* gas/riscv/cv-hwloop-08.d: Likewise.
+	* gas/riscv/cv-hwloop-08.l: Likewise.
+	* gas/riscv/cv-hwloop-08.s: Likewise.
+	* gas/riscv/cv-hwloop-count.d: Likewise.
+	* gas/riscv/cv-hwloop-count.s: Likewise.
+	* gas/riscv/cv-hwloop-counti.d: Likewise.
+	* gas/riscv/cv-hwloop-counti.s: Likewise.
+	* gas/riscv/cv-hwloop-endi.d: Likewise.
+	* gas/riscv/cv-hwloop-endi.s: Likewise.
+	* gas/riscv/cv-hwloop-setup.d: Likewise.
+	* gas/riscv/cv-hwloop-setup.s: Likewise.
+	* gas/riscv/cv-hwloop-setupi.d: Likewise.
+	* gas/riscv/cv-hwloop-setupi.s: Likewise.
+	* gas/riscv/cv-hwloop-starti.d: Likewise.
+	* gas/riscv/cv-hwloop-starti.s: Likewise.
+	* gas/riscv/cv-hwloop-09.d: Likewise.
+	* gas/riscv/cv-hwloop-09.l: Likewise.
+	* gas/riscv/cv-hwloop-09.s: Likewise.
+	* gas/riscv/cv-hwloop-10.d: Likewise.
+	* gas/riscv/cv-hwloop-10.l: Likewise.
+	* gas/riscv/cv-hwloop-10.s: Likewise.
